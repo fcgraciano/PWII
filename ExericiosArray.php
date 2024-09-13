@@ -1,3 +1,6 @@
+<?php include "cabecalho.php"; ?>
+
+
 <?php //          0         1         2
 $frutas = array("maçã", "laranja", "banana");
 print_r($frutas);// Escreve na tela os dados básicos do array
