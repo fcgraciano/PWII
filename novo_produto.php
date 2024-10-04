@@ -7,10 +7,10 @@
          && isset($_POST["datavalidade"])
       )
     {
-        $nome = $_POST["nome"];
-        $valor = $_POST["valor"];
-        $codigobarras = $_POST["codigobarras"];
+        
+
         $datavalidade = $_POST["datavalidade"];
+
         if( empty($_POST["nome"]) )
         {
             echo "<br><div class='alert alert-danger'>
@@ -36,9 +36,31 @@
         }
         else
         {
+            include "conexao.php";
+            
+            $nome = $_POST["nome"];
+            $valor =  str_replace( "," , ".", $_POST["valor"] ) ;
+            $codigobarras = $_POST["codigobarras"];
+
+            $query = "INSERT INTO produtos (DESCRICAO, VALOR, CODIGO_BARRAS, ATIVO)
+            
+                     VALUES ( '$nome', $valor , '$codigobarras', 1 ) ";
+
+            $resultado = $conexao->query($query);
+            if($resultado)
+            {
+                echo "<div class='alert alert-success'>
+                         Salvo no banco com sucesso 
+                      </div>" ;
+            }else{
+                echo "<div class='alert alert-danger'>
+                         Ocorreu algum erro ao salvar
+                      </div>" ;
+            }
+
             //Executa a lógica do programa
             //salvar no banco   
-            echo "<h1> Salvo no banco com sucesso </h1>" ;
+           
         }
         
     }else{
