@@ -7,6 +7,8 @@ if( isset($_GET["pesquisa"]) )
     if( empty($pesquisa) )
     {
        //Se a variavel estiver vazia executa aqui 
+
+
     }
     else
     {
@@ -16,6 +18,12 @@ if( isset($_GET["pesquisa"]) )
 else
 {
     $pesquisa = "";
+    include "conexao.php";
+    $sql = "Select Id, Descricao, Valor, Codigo_barras from Produtos order by Id desc";
+    $resultado = $conexao->query($sql);
+   
+    $conexao->close();
+    
 }
 
 
@@ -68,23 +76,20 @@ else
                             </tr>
                         </thead>
                         <tbody>
-                            <?php for($i = 0; $i < 25; $i++)
-                            {
-                                echo "<tr>
-                                        <td>Id $i</td>
-                                        <td>Descrição $i</td>
-                                        <td>Valor $i</td>
-                                        <td>Código barras $i</td>
-                                        <td>Imagem $i</td>
-                                        <td>
-                                            <a href='' class='btn btn-warning'>
-                                                Editar
-                                            </a>
-                                             <a href='' class='btn btn-danger'>
-                                                Excluir
-                                            </a>
-                                        </td>
-                                    </tr>";
+                            <?php 
+                            
+                            if ($resultado->num_rows > 0) {
+                                while($row = $resultado->fetch_assoc()) {
+                                    echo "<tr>";
+                                    echo "<td>" . $row["Id"] . "</td>";
+                                    echo "<td>" . $row["Descricao"] . "</td>";
+                                    echo "<td>" . $row["Valor"] . "</td>";
+                                    echo "<td><a href='editar_produto.php?id=$row[Id]' class='btn btn-warning' >Editar</a>  ";
+                                    echo "<a class='btn btn-danger'>Excluir</a></td>";
+                                    echo "</tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='3'>Nenhum registro encontrado</td></tr>";
                             }
                             ?>
                                                     
