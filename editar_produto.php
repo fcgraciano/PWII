@@ -1,7 +1,31 @@
 <?php include "cabecalho.php"; ?>
-
-
 <?php 
+if(  isset($_POST['id']) && !empty($_POST['id']) &&
+    isset($_POST['descricao']) && !empty($_POST['descricao']) &&
+    isset($_POST['valor']) && !empty($_POST['valor']) &&
+    isset($_POST['codigo_barras']) && !empty($_POST['codigo_barras'])
+)
+{
+    include "conexao.php";
+    $sql = "UPDATE PRODUTOS SET Descricao = '$_POST[descricao]',
+                                Valor =  $_POST[valor],
+                                Codigo_Barras = '$_POST[codigo_barras]'
+            WHERE Id = $_POST[id]";
+     
+     echo $sql;
+    $resultado = $conexao->query($sql);
+    if($resultado)
+    {
+        //logica para mensagem de sucesso
+    }
+    else
+    {
+        //caso o update de false
+    }
+}
+
+
+
 if ( isset($_GET["Id"]) && !empty( $_GET['Id'] )   )  
 {
     include "conexao.php";
@@ -21,25 +45,24 @@ if ( isset($_GET["Id"]) && !empty( $_GET['Id'] )   )
         }
         else
         {
-            header("location: produtos1.php");
+            header("location: produtos.php?erro=Nenhum registro encontrado");
         }
     }
     else
     {
-        header("location: produtos2.php");
+        header("location: produtos.php?erro=Erro do if do resultado");
     }
-
 }
 else
 {
-    header("location: produtos3.php");
+    header("location: produtos.php?erro=Nenhum id informado");
 }
 
 
 
 ?>
 
-<form action="editar_produto.php" method="post">
+<form action="editar_produto.php?Id=<?php echo $id; ?>" method="post">
     <input name="id" value="<?php echo $id ?>" />
     <input name="descricao" value="<?php echo $descricao ?>" />
     <input name="valor" value="<?php echo $valor ?>" />
