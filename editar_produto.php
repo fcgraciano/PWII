@@ -78,7 +78,7 @@ else
             {
                 while($row = $resultado_categoria->fetch_assoc()) 
                 {
-                    if($categoria_id == $row[Id])
+                    if($categoria_id == $row["Id"])
                     {
                         echo "<option selected value='$row[Id]'> $row[Nome] </option>";
                     }else{
