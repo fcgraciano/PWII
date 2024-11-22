@@ -85,11 +85,11 @@ $conexao->close();
                                     echo "<a href='excluir_usuario.php?Id=$row[Id]' class='btn btn-danger'>Excluir</a> ";
                                     if($row["Ativo"])
                                     {
-                                        echo "<a href='desativar_usuario.php?Id=$row[Id]' class='btn btn-danger'>Desativar</a> </td> ";   
+                                        echo "<a href='desativar_usuario.php?Id=$row[Id]' class='btn btn-danger'>Desativar</a>  ";   
                                     }else{
-                                        echo "<a href='ativar_usuario.php?Id=$row[Id]' class='btn btn-success'>Ativar</a> </td> ";
+                                        echo "<a href='ativar_usuario.php?Id=$row[Id]' class='btn btn-success'>Ativar</a>  ";
                                     }
-                                    
+                                    echo "<a href='permissoes_usuario.php?id_usuario=$row[Id]' class='btn btn-primary'>Permissões</a></td>";
                                     echo "</tr>";
                                 }
                             } else {
