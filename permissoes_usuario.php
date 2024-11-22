@@ -31,3 +31,35 @@ $resultado_usuario_permissao = $conexao->query($sql_usuarios_permissao);
     </div>
 
 </div>
+
+<?php 
+
+$sql = "
+    SELECT 
+        p.id AS permissao_id,
+        p.descricao AS permissao_nome,
+        CASE WHEN up.usuario_id IS NOT NULL THEN 1 ELSE 0 END AS possui_permissao
+    FROM 
+        permissoes p
+    LEFT JOIN 
+        usuarios_permissoes up 
+    ON 
+        p.id = up.permissao_id AND up.usuario_id = 1;
+";
+
+// Executa a consulta
+$result = $conexao->query($sql);
+
+// Exibe os resultados
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo "Permissão: " . $row["permissao_nome"] . " - Possui: " . $row["possui_permissao"] . "<br>";
+    }
+} else {
+    echo "Nenhuma permissão encontrada.";
+}
+
+// Fecha a conexão
+$conexao->close();
+
+?>

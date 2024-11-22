@@ -77,7 +77,7 @@ $script = "
         CONSTRAINT FK_PERMISSAO FOREIGN KEY (permissao_id) REFERENCES PERMISSOES(ID) ON DELETE CASCADE
     );
 
-
+    INSERT INTO `usuarios_permissoes` (`ID`, `USUARIO_ID`, `PERMISSAO_ID`) VALUES (NULL, '1', '6'), (NULL, '1', '5');
 ";
 
 $conexao = new mysqli($servidor, $usuario, $senha, $banco);
