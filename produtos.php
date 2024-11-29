@@ -1,4 +1,6 @@
-<?php include "cabecalho.php"; ?>
+<?php session_start(); 
+
+include "cabecalho.php"; ?>
 
 <?php 
 if( isset($_GET["pesquisa"]) )
@@ -65,9 +67,19 @@ else
             <div class="card-body">
                 <div class="row">
                     <div class="col-2">
-                        <a href="novo_produto.php" class="btn btn-success" >
-                            Novo Produto
-                        </a>
+                        <?php 
+                            if(isset($_SESSION["CAD_NOVO_PROD"])
+                                   && $_SESSION["CAD_NOVO_PROD"]                            
+                            )
+                            {
+                            ?>
+                                    <a href="novo_produto.php" class="btn btn-success" >
+                                        Novo Produto
+                                    </a>
+                            <?php
+                            }
+                        ?>
+                       
                     </div>
                     <div class="col-8">
                         <form action="produtos.php" method="get">

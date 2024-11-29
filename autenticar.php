@@ -1,6 +1,4 @@
-<?php
-
-session_start();
+<?php session_start(); 
 
 include "conexao.php";
 
@@ -16,6 +14,8 @@ if( (isset($_POST["login"]) && !empty($_POST["login"]) )
         $usuario = $resultado->fetch_assoc();
         $idUsuario = $usuario['Id'];
         $_SESSION["UsuarioLogado"] = $_POST["login"];
+        $_SESSION["Logado"] = true;
+        $_SESSION["CAD_NOVO_PROD"] = true;
         $_SESSION["Permissoes"] = [];
         $sql_permissoes = "Select Role from USUARIOS_PERMISSOES inner join Permissoes 
                             on(Permissoes.Id = USUARIOS_PERMISSOES.Permissao_Id)

@@ -32,8 +32,8 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="variavel.php">
-                Variavel
+            <a class="nav-link" href="logoff.php">
+                Logoff
             </a>
         </li>
 
